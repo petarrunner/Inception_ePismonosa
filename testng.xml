@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <test verbose="2" name="C:/Users/chouw/IdeaProjects/Petar QA/GitHub - Inception">
+        <classes>
+            <class name="tests.InceptionTest">
+                <methods>
+                    <include name="loginWithValidCredentials_F1"/>
+                    <include name="loginWithInvalidPassword_F2"/>
+                    <include name="loginWithOneEmptyField_F3"/>
+                    <include name="checkForgottenPasswordFunctionality_F4"/>
+                    <include name="checkErrorMessagesWithInvalidLogin_F5"/>
+                    <include name="checkPasswordVisibility_F6"/>
+                    <include name="checkLoginEnterFunctionality_F9"/>
+                    <include name="verifyInvalidRegistrationWithoutUpperCaseLowerCaseNumberAndSymbol_NF1"/>
+                    <include name="verifyInvalidRegistrationWithValidPasswordWithLessThanSixCharacters_NF2"/>
+                    <include name="verifyInvalidBackFunctionalityAfterLogOut_NF3"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
