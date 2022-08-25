@@ -27,7 +27,7 @@ public class InceptionTest extends BaseTest {
         loginPage.validLogin(USERNAME, PASSWORD);
 
         softAssert.assertTrue(mainPage.checkSuccessfullyLogin(FULLNAME), "Login is unsuccessful. There isn't a text contains user's full name.");
-        softAssert.assertTrue(driver.findElement(By.className("user-box")).isDisplayed(), "There isn't field with users information.");
+        softAssert.assertTrue(mainPage.checkIfUserBoxIsDisplayed(), "There isn't field with users information.");
         softAssert.assertAll();
     }
 
@@ -68,7 +68,6 @@ public class InceptionTest extends BaseTest {
         loginPage.validLogin(USERNAME, INVALID_PASSWORD);
 
         Assert.assertEquals(loginPage.getTextErrorMessage(), "Pogrešni kredencijali", "There isn't an error message with text `Pogrešni kredencijali`.");
-        sleep(TIME_SEC);
     }
 
     @Test
@@ -86,9 +85,10 @@ public class InceptionTest extends BaseTest {
     @Test
     public void checkLoginEnterFunctionality_F9() {
         InceptionLoginPage loginPage = new InceptionLoginPage(driver);
+        InceptionMainPage mainPage = new InceptionMainPage(driver);
         loginPage.validLoginPressEnter(USERNAME, PASSWORD);
 
-        Assert.assertTrue(driver.findElement(By.className("user-box")).isDisplayed(), "There isn't field with users information.");
+        Assert.assertTrue(mainPage.checkIfUserBoxIsDisplayed(), "There isn't field with users information.");
     }
 
     @Test
@@ -103,7 +103,9 @@ public class InceptionTest extends BaseTest {
         for (String password : passwords) {
             registrationPage.registrationWithInvalidPassword(USERNAME, LASTNAME, JMBG, INVALID_EMAIL, password);
 
-            softAssert.assertEquals(registrationPage.getErrorRegistrationMessage(), "Lozinka ne zadovoljava kriterijum od minimum 6 karaktera, bar jedno veliko slovo i jedan broj.", "Valid password.");
+            softAssert.assertEquals(registrationPage.getErrorRegistrationMessage(),
+                    "Lozinka ne zadovoljava kriterijum od minimum 6 karaktera, bar jedno veliko slovo i jedan broj.",
+                    "Password >> " + password + " << is valid password.");
             driver.navigate().refresh();
         }
         softAssert.assertAll();
@@ -132,13 +134,9 @@ public class InceptionTest extends BaseTest {
         loginPage.validLogin(USERNAME, PASSWORD);
 
         softAssert.assertTrue(mainPage.checkSuccessfullyLogin(FULLNAME), "Login is unsuccessful. Wrong username or password is entered");
-
         mainPage.logOut();
-
         softAssert.assertTrue(loginPage.checkH1Text(h1Text), "Current page is not a login page. There isn't text `Prijava na ePismonoša portal`");
-
         driver.navigate().back();
-
         softAssert.assertTrue(driver.getCurrentUrl().contains("login"), "Current page is not a login page. Current url doesn't contain word `login`");
         softAssert.assertAll();
     }

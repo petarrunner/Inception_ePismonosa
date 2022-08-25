@@ -5,8 +5,9 @@
     <classes>
       <class name="tests.InceptionTest">
         <methods>
-          <include name="loginWithValidCredentials_F1"/>
+          <include name="verifyInvalidRegistrationWithoutUpperCaseLowerCaseNumberAndSymbol_NF1"/>
           <include name="testInit"/>
+          <include name="checkForgottenPasswordFunctionality_F4"/>
           <include name="testTearDown"/>
         </methods>
       </class> <!-- tests.InceptionTest -->

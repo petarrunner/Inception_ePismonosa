@@ -30,6 +30,11 @@ public class InceptionMainPage extends BaseHelper {
         return fullNameProfile.contains(fullName);
     }
 
+    public boolean checkIfUserBoxIsDisplayed() {
+        wdWait.until(ExpectedConditions.presenceOfElementLocated(By.className("user-box")));
+        return driver.findElement(By.className("user-box")).isDisplayed();
+    }
+
     public void logOut() {
         clickProfileIcon();
         clickLogOutButton();
